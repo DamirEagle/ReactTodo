@@ -11,14 +11,25 @@ class App extends React.Component {
   }
 
   render() {
-    return;
-    {
+    return (
       <div>
         <AddTodo />
-        <todoList />
-      </div>;
-    }
+        <todoList addTodoFn={this.addTodo} />
+      </div>
+    );
   }
+  addTodo = async todo => {
+    await this.setState({
+      todos: [
+        ...this.state.todos,
+        {
+          text: todo,
+          completed: false
+        }
+      ]
+    });
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+  };
 }
 
 export default App;

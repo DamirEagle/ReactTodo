@@ -1,28 +1,39 @@
-import React from 'react';
+import React from "react";
 
-class addTodo extends React.Component{
-  constructor(){
+class addTodo extends React.Component {
+  constructor() {
     super();
     this.state = {
-      todo: ''
-    }
+      todo: ""
+    };
   }
-  render(){
+  render() {
     <div>
-      <forme onSubmit = {(e) => {this.onSubmit(e)}}>
-        <input type='text' onChange = {(e)=>{this.updateInput(e)}}></input>
-        <button type = 'submit'></button>
+      <form
+        onSubmit={e => {
+          this.onSubmit(e);
+        }}
+      >
+        <input
+          id="addTodoInput"
+          type="text"
+          onChange={e => {
+            this.updateInput(e);
+          }}
+        />
+        <button type="submit" />
       </form>
-    </div>
+    </div>;
   }
-  updateInput = (e) =>{
+  updateInput = e => {
     let newWord = e.target.value;
-    this.setState({todo: newWord});
-  }
+    this.setState({ todo: newWord });
+  };
   onSubmit = e => {
     e.preventDefault();
-
-  }
+    this.props.addTodo(this.state.todo);
+    Document.getElementById("addTodoInput").value = "";
+  };
 }
 
-export default addTodo
+export default addTodo;
