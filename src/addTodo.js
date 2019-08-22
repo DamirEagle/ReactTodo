@@ -1,6 +1,6 @@
 import React from "react";
 
-class addTodo extends React.Component {
+class Addtodo extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -8,32 +8,27 @@ class addTodo extends React.Component {
     };
   }
   render() {
-    <div>
-      <form
-        onSubmit={e => {
-          this.onSubmit(e);
-        }}
-      >
-        <input
-          id="addTodoInput"
-          type="text"
-          onChange={e => {
-            this.updateInput(e);
-          }}
-        />
-        <button type="submit" />
-      </form>
-    </div>;
+    return (
+      <div className="addTodoContainer">
+        <form onSubmit={e => this.submitTodo(e)}>
+          <input
+            id="addTodoInput"
+            onChange={e => this.updateInput(e)}
+            type="text"
+          />
+          <button type="submit">Add to do</button>
+        </form>
+      </div>
+    );
   }
   updateInput = e => {
-    let newWord = e.target.value;
-    this.setState({ todo: newWord });
+    this.setState({ todo: e.target.value });
   };
-  onSubmit = e => {
+  submitTodo = e => {
     e.preventDefault();
-    this.props.addTodo(this.state.todo);
-    Document.getElementById("addTodoInput").value = "";
+    this.props.addTodoFn(this.state.todo);
+    document.getElementById("addTodoInput").value = "";
+    console.log(e, this.state);
   };
 }
-
-export default addTodo;
+export default Addtodo;
